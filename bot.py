@@ -30,13 +30,20 @@ async def on_command_error(ctx, error):
 async def six_nine(ctx):
     await ctx.send('nice!')
 
-@bot.command(name='roll_dice', help='(würfel, augen) simuliert einen würfel')
+@bot.command(name='roll-dice', help='(würfel, augen) simuliert einen würfel')
 async def roll_dice(ctx, number_of_dices, number_of_sides):
     dice = [
         str(random.choice(range(1, number_of_sides)))
         for _ in range(number_of_dices)
     ]
     await ctx.send(', '.join(dice))
+
+@bot.command(name='bot relaod', help='startet einmal den bot neu')
+@commands.has_role('Admin')
+async def bot_reload(ctx):
+    os.popen('sh bot_reload.sh')
+    quit()
+
 
 @bot.command(name='create-voice', help='Erstellt einen Voice channel')
 @commands.has_role('Admin')
